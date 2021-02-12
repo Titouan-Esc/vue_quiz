@@ -43,18 +43,57 @@
     </p>
     <h2>{{ message }}</h2>
     <input v-model="message" />
+    <ul id="array">
+      <li v-for="ho in ho" :key="ho.name">
+        {{ ho.name }}, what are is job? {{ ho.job }}
+      </li>
+    </ul>
+    <p>
+      Vue permet de créer des composants exportables qui permettent de créer des
+      templates prédéfinis et réutilisables "à l'infini"
+    </p>
+    <p>
+      Ces composants peuvent comporter des props, c'est à dire des éléments qui
+      varieront en fonction des données qui leur sont attribuées.
+    </p>
+    <logo
+      bienvenue="Ho la con de tes morts"
+      v-on:sendBounce="bounces++"
+      :bounces="bounces"
+    />
+    <p>
+      Ces props sont assignalbes a des elements dynamiques mais aussi a des
+      variables éléments dynalmique qui s'afficheront si ils sont définis et qui
+      utiliseront le procédure fallback définis au préalable (dans le cas ou
+      aucune fallback procedure n'est définie, l'élément ne s'affichera tout
+      simplement pas
+    </p>
+    <logo :bienvenue="message" />
   </div>
 </template>
 
 <script>
+import logo from "./components/logo";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    logo,
+  },
   data() {
     return {
       counter: 0,
       clicks: 1,
       message: "Mange tes morts batard",
+      ho: [
+        { name: "la con de tes morts", job: "démonteur de culasse" },
+        { name: "he cousin", job: "éleveur de brebis" },
+        { name: "Dede la menace", job: "chauffeur de toro" },
+        { name: "Pierre", job: "Caillou" },
+        { name: "Didier", job: "Testeur de Ricard" },
+        { name: "Jean", job: "On est là" },
+      ],
+      bounces: 0,
     };
   },
 
